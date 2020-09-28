@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:0.9.0-M3'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
     }
 }
 
@@ -24,6 +24,12 @@ repositories {
 dependencies {
     compile 'com.indeed:java-dogstatsd-client:2.0.11'
     compile 'org.apache.kafka:kafka_2.11:0.9.0.1'
+//    compile('org.apache.kafka:kafka_2.11:0.9.0.1'){
+//      exclude group:'org.apache.kafka', module:'kafka-clients'
+//    }
+//    compile 'org.apache.kafka:kafka_2.12:2.3.1'
+//    compile group: 'com.yammer.metrics', name: 'metrics-core', version: '2.2.0'
+//    compile 'org.apache.kafka:kafka-clients:2.3.1'
     compile 'org.slf4j:slf4j-log4j12:+'
 
     testCompile('junit:junit:4.11',
@@ -46,13 +52,20 @@ configurations {
     compile.exclude module: 'jmxri'
     compile.exclude module: 'jmxtools'
     compile.exclude module: 'mail'
+
+    runtime.exclude group:'org.apache.kafka', module:'kafka-clients'
 }
 
 shadowJar {
     exclude 'META-INF/*.DSA'
     exclude 'META-INF/*.RSA'
     exclude 'META-INF/maven/*'
-    exclude dependency('org.apache.kafka:kafka_2.10:0.9.0.1')
-    exclude dependency('org.slf4j:slf4j-log4j12')
+//    exclude dependency('org.apache.kafka:kafka_2.10:0.9.0.1')
+    dependencies {
+      exclude dependency('org.apache.kafka:kafka_2.10:0.9.0.1')
+//      exclude dependency('org.apache.kafka:kafka_2.12:2.3.1')
+//      exclude dependency('org.apache.kafka:kafka-clients:2.3.1')
+      exclude dependency('org.slf4j:slf4j-log4j12')
+    }
 }
 
