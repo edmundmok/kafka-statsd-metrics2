@@ -4,10 +4,13 @@ import com.timgroup.statsd.StatsDClient;
 import com.yammer.metrics.core.Clock;
 import org.apache.kafka.common.Metric;
 import org.apache.kafka.common.MetricName;
+import org.apache.kafka.common.metrics.KafkaMetric;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
@@ -60,5 +63,13 @@ public class KafkaStatsDReporterTest {
 
     addMetricAndRunReporter("foo", metric, "bar");
     verify(statsD).gauge(Matchers.eq("foo"), Matchers.eq(value), Matchers.eq("bar"));
+  }
+
+  @Test
+  public void testSomething() {
+    KafkaMetric metric = Mockito.mock(KafkaMetric.class);
+    
+    metric.value();
+    Assert.assertTrue(true);
   }
 }

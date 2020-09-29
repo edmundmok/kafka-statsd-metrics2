@@ -34,7 +34,7 @@ dependencies {
 
     testCompile('junit:junit:4.11',
             'org.easymock:easymock:3.2',
-            "org.mockito:mockito-core:1.+")
+            "org.mockito:mockito-core:2.+")
 }
 
 compileJava {
@@ -53,7 +53,7 @@ configurations {
     compile.exclude module: 'jmxtools'
     compile.exclude module: 'mail'
 
-    runtime.exclude group:'org.apache.kafka', module:'kafka-clients'
+//    runtime.exclude group:'org.apache.kafka', module:'kafka-clients'
 }
 
 shadowJar {
