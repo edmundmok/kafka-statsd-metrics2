@@ -1,9 +1,11 @@
 buildscript {
     repositories {
-        jcenter()
+      maven { url "https://jcenter.bintray.com" }
+
+//        jcenter()
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:0.9.0-M3'
     }
 }
 
@@ -17,7 +19,8 @@ group = 'com.airbnb'
 description = 'StatsD Support for Kafka Metrics (kafka version: 0.8 and 0.9)'
 
 repositories {
-    mavenCentral()
+//    mavenCentral()
+    maven { url "https://repo.maven.apache.org/maven2/" }
     maven { url "http://dl.bintray.com/airbnb/jars" }
 }
 
@@ -52,9 +55,7 @@ shadowJar {
     exclude 'META-INF/*.DSA'
     exclude 'META-INF/*.RSA'
     exclude 'META-INF/maven/*'
-    dependencies {
-        exclude dependency('org.apache.kafka:kafka_2.10:0.9.0.1')
-        exclude dependency('org.slf4j:slf4j-log4j12')
-    }
+    exclude(dependency('org.apache.kafka:kafka_2.11:0.9.0.1'))
+    exclude(dependency('org.slf4j:slf4j-log4j12'))
 }
 
